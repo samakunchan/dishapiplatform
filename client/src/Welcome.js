@@ -50,7 +50,7 @@ const Welcome = () => (
                             <Api />
                         </div>
                         <div className="other__content">
-                          <h3><a href={`https://${document.domain}:8443`}>API</a></h3>
+                          <h3><a href={`https://${document.domain}:8443/api`}>API</a></h3>
                         </div>
                     </div>
                     <div className="other__bloc">

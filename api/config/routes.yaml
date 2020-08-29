@@ -1,3 +1,8 @@
+api_login_check:
+    path: /api/login_check
+
+#  curl -X POST -H "Content-Type: application/json" https://localhost:8443/api/login_check -d '{"username":"sam@test.fr","password":"123"}'
+
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index

@@ -19,6 +19,9 @@
     "api-platform/schema-generator": {
         "version": "v2.2.2"
     },
+    "brick/math": {
+        "version": "0.9.1"
+    },
     "composer/semver": {
         "version": "1.5.1"
     },
@@ -46,6 +49,9 @@
     "doctrine/common": {
         "version": "2.13.1"
     },
+    "doctrine/data-fixtures": {
+        "version": "1.4.3"
+    },
     "doctrine/dbal": {
         "version": "2.10.2"
     },
@@ -66,6 +72,18 @@
     },
     "doctrine/doctrine-cache-bundle": {
         "version": "1.3.5"
+    },
+    "doctrine/doctrine-fixtures-bundle": {
+        "version": "3.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.0",
+            "ref": "e5b542d4ef47d8a003c91beb35650c76907f7e53"
+        },
+        "files": [
+            "src/DataFixtures/AppFixtures.php"
+        ]
     },
     "doctrine/doctrine-migrations-bundle": {
         "version": "1.2",
@@ -125,6 +143,9 @@
             ".php_cs.dist"
         ]
     },
+    "fzaninotto/faker": {
+        "version": "v1.9.1"
+    },
     "guzzlehttp/guzzle": {
         "version": "6.5.4"
     },
@@ -133,6 +154,12 @@
     },
     "guzzlehttp/psr7": {
         "version": "1.6.1"
+    },
+    "justinrainbow/json-schema": {
+        "version": "5.2.10"
+    },
+    "jzonta/faker-restaurant": {
+        "version": "1.1.8"
     },
     "laminas/laminas-code": {
         "version": "3.4.1"
@@ -143,8 +170,26 @@
     "laminas/laminas-zendframework-bridge": {
         "version": "1.0.4"
     },
+    "lcobucci/jwt": {
+        "version": "3.3.3"
+    },
     "league/html-to-markdown": {
         "version": "4.9.1"
+    },
+    "lexik/jwt-authentication-bundle": {
+        "version": "2.5",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "2.5",
+            "ref": "5b2157bcd5778166a5696e42f552ad36529a07a6"
+        },
+        "files": [
+            "config/packages/lexik_jwt_authentication.yaml"
+        ]
+    },
+    "namshi/jose": {
+        "version": "7.2.3"
     },
     "nelmio/cors-bundle": {
         "version": "1.5",
@@ -203,8 +248,26 @@
     "ralouphie/getallheaders": {
         "version": "3.0.3"
     },
+    "ramsey/collection": {
+        "version": "1.1.0"
+    },
+    "ramsey/uuid": {
+        "version": "4.1.1"
+    },
+    "ramsey/uuid-doctrine": {
+        "version": "1.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "1.3",
+            "ref": "471aed0fbf5620b8d7f92b7a5ebbbf6c0945c27a"
+        }
+    },
     "symfony/asset": {
         "version": "v5.0.8"
+    },
+    "symfony/browser-kit": {
+        "version": "v5.0.11"
     },
     "symfony/cache": {
         "version": "v5.0.8"
@@ -228,11 +291,17 @@
             "config/bootstrap.php"
         ]
     },
+    "symfony/css-selector": {
+        "version": "v5.0.11"
+    },
     "symfony/dependency-injection": {
         "version": "v5.0.8"
     },
     "symfony/doctrine-bridge": {
         "version": "v5.0.8"
+    },
+    "symfony/dom-crawler": {
+        "version": "v5.0.11"
     },
     "symfony/dotenv": {
         "version": "v5.0.8"
@@ -332,6 +401,21 @@
     "symfony/options-resolver": {
         "version": "v5.0.8"
     },
+    "symfony/phpunit-bridge": {
+        "version": "4.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.3",
+            "ref": "6d0e35f749d5f4bfe1f011762875275cd3f9874f"
+        },
+        "files": [
+            ".env.test",
+            "bin/phpunit",
+            "phpunit.xml.dist",
+            "tests/bootstrap.php"
+        ]
+    },
     "symfony/polyfill-intl-idn": {
         "version": "v1.17.0"
     },
@@ -402,6 +486,9 @@
     },
     "symfony/stopwatch": {
         "version": "v5.0.8"
+    },
+    "symfony/test-pack": {
+        "version": "v1.0.6"
     },
     "symfony/translation-contracts": {
         "version": "v2.1.2"

@@ -19,6 +19,7 @@ RUN apk add --no-cache \
 		file \
 		gettext \
 		git \
+		curl \
 	;
 
 ARG APCU_VERSION=5.1.18
