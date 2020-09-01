@@ -4,11 +4,12 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\RecipeRepository;
-use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -33,18 +34,20 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Recipe
 {
+    use Timestapable;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="uuid", unique=true)
      * @Groups({"recipe:list", "recipe:details"})
      */
-    private $uid;
+    private UuidInterface $uid;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -53,20 +56,20 @@ class Recipe
      * @Assert\Type("string")
      * @Groups({"user:details", "recipe:list", "recipe:details"})
      */
-    private $title;
+    private string $title;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"recipe:list", "recipe:details"})
      */
-    private $imgUrl;
+    private string $imgUrl;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\Type("string")
      * @Groups({"recipe:list", "recipe:details"})
      */
-    private $slug;
+    private string $slug;
 
     /**
      * @ORM\Column(type="text")
@@ -75,34 +78,27 @@ class Recipe
      * @Assert\Type("string")
      * @Groups({"recipe:details"})
      */
-    private $description;
+    private string $description;
 
     /**
-     * @ORM\Column(type="datetime")
-     * @Assert\Type("datetime")
-     * @Groups({"recipe:list", "recipe:details"})
-     */
-    private $date;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Ingredient::class, mappedBy="recipe")
+     * @ORM\OneToMany(targetEntity=Ingredient::class, mappedBy="recipe", orphanRemoval=true, cascade={"persist", "remove"})
      * @Assert\Type("object")
      * @Groups({"recipe:details"})
      */
-    private $ingredients;
+    private Collection $ingredients;
 
     /**
-     * @ORM\OneToMany(targetEntity=Step::class, mappedBy="recipe")
+     * @ORM\OneToMany(targetEntity=Step::class, mappedBy="recipe", orphanRemoval=true, cascade={"persist", "remove"})
      * @Assert\Type("object")
      * @Groups({"recipe:details"})
      */
-    private $steps;
+    private Collection $steps;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="recipes")
      * @Groups({"recipe:details"})
      */
-    private $author;
+    private UserInterface $author;
 
     public function __construct()
     {
@@ -162,18 +158,6 @@ class Recipe
     public function setDescription(string $description): self
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-    public function getDate(): ?DateTimeInterface
-    {
-        return $this->date;
-    }
-
-    public function setDate(DateTimeInterface $date): self
-    {
-        $this->date = $date;
 
         return $this;
     }
@@ -240,12 +224,12 @@ class Recipe
         return $this;
     }
 
-    public function getAuthor(): ?User
+    public function getAuthor(): UserInterface
     {
         return $this->author;
     }
 
-    public function setAuthor(?User $author): self
+    public function setAuthor(UserInterface $author): self
     {
         $this->author = $author;
 

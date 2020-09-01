@@ -25,7 +25,7 @@ class AppFixtures extends Fixture implements DependentFixtureInterface
             $recipe->setImgUrl('http://placeimg.com/640/480/nature');
             $recipe->setAuthor($this->getReference(UserFixtures::USER));
             $recipe->setSlug($recipe->getTitle());
-            $recipe->setDate($faker->dateTime($max = 'now', $timezone = 'UTC'));
+            $recipe->setCreatedAt($faker->dateTime($max = 'now', $timezone = 'UTC'));
 
 
             for ($j = 0; $j < $faker->numberBetween(3, 10); $j++ ) {

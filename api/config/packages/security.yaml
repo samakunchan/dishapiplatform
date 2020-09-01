@@ -12,7 +12,7 @@ security:
                 property: email
     firewalls:
         api_doc:
-            pattern: ^/api/doc
+            pattern: ^/api/docs
             security: false
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -20,20 +20,45 @@ security:
         login:
             pattern:  ^/api/login
             stateless: true
-            anonymous: true
-            # provider: app_user_provider
-            # anonymous: true
             json_login:
                 check_path: /api/login_check
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
-        api:
-            pattern:   ^/api/
+        users:
+            pattern:   ^/api/users
+            methods: [ GET, PUT, PATCH, DELETE ]
             stateless: true
             guard:
                 authenticators:
                     - lexik_jwt_authentication.jwt_token_authenticator
-
+        profiles:
+            pattern:   ^/api/profiles
+            methods: [ POST, PUT, PATCH, DELETE ]
+            stateless: true
+            guard:
+                authenticators:
+                    - lexik_jwt_authentication.jwt_token_authenticator
+        recipes:
+            pattern:   ^/api/recipes
+            methods: [ POST, PUT, PATCH, DELETE ]
+            stateless: true
+            guard:
+                authenticators:
+                    - lexik_jwt_authentication.jwt_token_authenticator
+        ingredients:
+            pattern:   ^/api/ingredients
+            methods: [ GET, POST, PUT, PATCH, DELETE ]
+            stateless: true
+            guard:
+                authenticators:
+                    - lexik_jwt_authentication.jwt_token_authenticator
+        steps:
+            pattern:   ^/api/steps
+            methods: [ GET, POST, PUT, PATCH, DELETE ]
+            stateless: true
+            guard:
+                authenticators:
+                    - lexik_jwt_authentication.jwt_token_authenticator
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
 
@@ -43,8 +68,15 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        - { path: ^/api/users, roles: IS_AUTHENTICATED_ANONYMOUSLY, method: [PUT, PATCH, DELETE] }
         - { path: ^/api/docs, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/api/users, roles: IS_AUTHENTICATED_ANONYMOUSLY, methods: [ GET, PUT, PATCH, DELETE ] }
+        - { path: ^/api/recipes, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/api/ingredients, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/api/step, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/api/profiles, roles: IS_AUTHENTICATED_FULLY }
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
+
+    # peut etre mettre un autre role
+    role_hierarchy:
+        ROLE_ADMIN: ROLE_USER

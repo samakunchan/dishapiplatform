@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Profile;
 use App\Entity\User;
+use DateTimeImmutable;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -31,8 +32,9 @@ class UserFixtures extends Fixture
         $profile->setCode('34090');
         $profile->setOrganisation('Samakunchan Technology');
         $profile->setUrlOrg('https://samakunchan-technology.com');
-        $profile->setLogo('https://samakunchan-technology.com/uploads/images/logo-5ec23714320e6.webp');
+        $profile->setLogo('');
         $user->setProfile($profile);
+        $user->setCreatedAt(new DateTimeImmutable());
         $manager->persist($user);
         $this->addReference(self::USER, $user);
         $manager->flush();
