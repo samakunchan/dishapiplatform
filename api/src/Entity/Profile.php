@@ -23,8 +23,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *              "normalization_context"={"groups"={"profil:details"}}
  *          },
  *          "put",
- *          "patch",
- *          "delete"
+ *          "patch"
  *     }
  * )
  */
@@ -35,7 +34,7 @@ class Profile
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private int $id;
+    private ?int $id;
 
     /**
      * @ORM\Column(type="uuid", unique=true)
@@ -45,19 +44,19 @@ class Profile
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\Length(min="3", minMessage="Le nom de l'ingrédient doit avoir au moins {{ limit }} caractères.")
+     * @Assert\Length(min="3", minMessage="Le nom de l'organisation doit avoir au moins {{ limit }} caractères.")
      * @Assert\Type("string")
      * @Groups({"profil:list", "profil:details"})
      */
-    private string $organisation;
+    private ?string $organisation;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\Length(min="3", minMessage="Le nom de l'ingrédient doit avoir au moins {{ limit }} caractères.")
+     * @Assert\Length(min="3", minMessage="L'adresse l'organisation doit avoir au moins {{ limit }} caractères.")
      * @Assert\Type("string")
      * @Groups({"profil:details"})
      */
-    private string $addressOrg;
+    private ?string $addressOrg;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -65,21 +64,23 @@ class Profile
      * @Assert\Type(type="string", message="La valeur {{ value }} n'est pas une valeur de type: {{ type }}.")
      * @Groups({"profil:details"})
      */
-    private string $code;
+    private ?string $code;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\Length(min="3", minMessage="Le nom de l'ingrédient doit avoir au moins {{ limit }} caractères.")
-     * @Assert\Type("string")
+     * @Assert\Length(min="3", minMessage="Le lien vers le site de l'organisation doit avoir au moins {{ limit }} caractères.")
+     * @Assert\Type("string", message="La valeur {{ value }} n'est pas une valeur de type: {{ type }}.")
      * @Groups({"profil:list", "profil:details"})
      */
-    private string $urlOrg;
+    private ?string $urlOrg;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(min="3", minMessage="L'url du logo doit avoir au moins {{ limit }} caractères.")
+     * @Assert\Type("string", message="La valeur {{ value }} n'est pas une valeur de type: {{ type }}.")
      * @Groups({"profil:list", "profil:details"})
      */
-    private string $logo;
+    private ?string $logo;
 
     public function __construct()
     {

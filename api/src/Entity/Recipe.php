@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\RecipeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -20,7 +21,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  *          "get"={
  *              "normalization_context"={"groups"={"recipe:list"}}
  *          },
- *          "post"
+ *          "post"={
+ *              "normalization_context"={"groups"={"recipe:post"}}
+ *          }
  *      },
  *     itemOperations={
  *          "get"={
@@ -29,7 +32,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  *          "put",
  *          "patch",
  *          "delete"
- *     }
+ *     },
+ *     denormalizationContext={"groups"={"recipe:post"}}
  * )
  */
 class Recipe
@@ -40,12 +44,14 @@ class Recipe
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @ApiProperty(identifier=false)
      */
-    private int $id;
+    private ?int $id;
 
     /**
      * @ORM\Column(type="uuid", unique=true)
      * @Groups({"recipe:list", "recipe:details"})
+     * @ApiProperty(identifier=true)
      */
     private UuidInterface $uid;
 
@@ -54,13 +60,13 @@ class Recipe
      * @Assert\Length(min="3", minMessage="Le nom de l'ingrédient doit avoir au moins {{ limit }} caractères.")
      * @Assert\NotBlank(message="Le champ ne doit pas être vide.")
      * @Assert\Type("string")
-     * @Groups({"user:details", "recipe:list", "recipe:details"})
+     * @Groups({"user:details", "recipe:list", "recipe:details", "recipe:post"})
      */
     private string $title;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"recipe:list", "recipe:details"})
+     * @Groups({"recipe:list", "recipe:details", "recipe:post"})
      */
     private string $imgUrl;
 
@@ -76,7 +82,7 @@ class Recipe
      * @Assert\NotBlank(message="Le champ ne doit pas être vide.")
      * @Assert\Length(min="6", minMessage="La description doit avoir au moins {{ limit }} caractères.")
      * @Assert\Type("string")
-     * @Groups({"recipe:details"})
+     * @Groups({"recipe:details", "recipe:post"})
      */
     private string $description;
 
@@ -96,7 +102,7 @@ class Recipe
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="recipes")
-     * @Groups({"recipe:details"})
+     * @Groups({"recipe:details", "recipe:post"})
      */
     private UserInterface $author;
 

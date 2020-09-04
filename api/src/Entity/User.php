@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiSubresource;
 use App\Repository\UserRepository;
@@ -50,12 +51,14 @@ class User implements UserInterface
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @ApiProperty(identifier=false)
      */
-    private int $id;
+    private ?int $id;
 
     /**
      * @ORM\Column(type="uuid", unique=true)
      * @Groups({"user:list", "user:details"})
+     * @ApiProperty(identifier=true)
      */
     private UuidInterface $uid;
 
@@ -77,12 +80,13 @@ class User implements UserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Assert\Length(min="3", minMessage="Le mot de passe doit avoir au moins {{ limit }} caractères.")
      * @Groups({"user:write"})
      */
     private string $password;
 
     /**
-     * @ORM\OneToOne(targetEntity=Profile::class, cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Profile::class, orphanRemoval=true, cascade={"persist", "remove"})
      * @ApiSubresource
      * @Groups({"user:details"})
      */

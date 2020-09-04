@@ -1,0 +1,26 @@
+    
+App\Entity\Recipe:
+    titre1:
+        title: Rougail boucané
+        slug: rougail-boucane
+        description: C'est du boucané avec des tomates très épicés
+        imgUrl: http://placehold.if/300x300
+        author: '@random'
+        createdAt: <datetime()>
+        
+    titre2:
+        title: Rougail saucisse
+        slug: rougail-saucisse
+        description: C'est du saucisse avec des tomates très épicés
+        imgUrl: http://placehold.if/300x300
+        author: '@random'
+        createdAt: <datetime()>
+
+    titre3:
+        title: Ti jak boucané
+        slug: ti-jak-boucane
+        description: C'est du ti kaj et du boucané
+        imgUrl: http://placehold.if/300x300
+        author: '@random'
+        createdAt: <datetime()>
+

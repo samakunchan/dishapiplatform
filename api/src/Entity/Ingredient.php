@@ -34,27 +34,28 @@ class Ingredient
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"ingredient:list", "ingredient:details"})
      */
-    private $id;
+    private ?int $id;
 
     /**
      * @ORM\Column(type="uuid", unique=true)
      * @Groups({"ingredient:list", "ingredient:details"})
      */
-    private $uid;
+    private string $uid;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Length(min="3", minMessage="Le nom de l'ingrédient doit avoir au moins {{ limit }} caractères.")
      * @Groups({"ingredient:list", "ingredient:details", "recipe:details"})
      */
-    private $name;
+    private string $name;
 
     /**
      * @ORM\ManyToOne(targetEntity=Recipe::class, inversedBy="ingredients")
      * @Groups({"ingredient:details"})
      */
-    private $recipe;
+    private ?Recipe $recipe;
 
     public function __construct()
     {

@@ -120,6 +120,14 @@
       <path value="$PROJECT_DIR$/api/vendor/ramsey/collection" />
       <path value="$PROJECT_DIR$/api/vendor/brick/math" />
       <path value="$PROJECT_DIR$/api/vendor/ramsey/uuid-doctrine" />
+      <path value="$PROJECT_DIR$/api/vendor/myclabs/deep-copy" />
+      <path value="$PROJECT_DIR$/api/vendor/nelmio/alice" />
+      <path value="$PROJECT_DIR$/api/vendor/theofidry/alice-data-fixtures" />
+      <path value="$PROJECT_DIR$/api/vendor/sebastian/exporter" />
+      <path value="$PROJECT_DIR$/api/vendor/sebastian/recursion-context" />
+      <path value="$PROJECT_DIR$/api/vendor/sebastian/comparator" />
+      <path value="$PROJECT_DIR$/api/vendor/sebastian/diff" />
+      <path value="$PROJECT_DIR$/api/vendor/hautelook/alice-bundle" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.4" />

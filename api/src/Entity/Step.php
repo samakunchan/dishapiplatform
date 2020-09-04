@@ -34,26 +34,28 @@ class Step
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"step:list", "step:details"})
      */
-    private $id;
+    private ?int $id;
 
     /**
      * @ORM\Column(type="uuid", unique=true)
-     * @Groups({"step:details"})
+     * @Groups({"step:list", "step:details"})
      */
-    private $uid;
+    private string $uid;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Assert\Length(min="3", minMessage="Le nom de l'ingrédient doit avoir au moins {{ limit }} caractères.")
+     * @Assert\Length(min="6", minMessage="La description des étapes doit avoir au moins {{ limit }} caractères.")
      * @Groups({"step:list", "step:details", "recipe:details"})
      */
-    private $description;
+    private string $description;
 
     /**
      * @ORM\ManyToOne(targetEntity=Recipe::class, inversedBy="steps")
+     * @Groups({"step:details"})
      */
-    private $recipe;
+    private ?Recipe $recipe;
 
     public function __construct()
     {

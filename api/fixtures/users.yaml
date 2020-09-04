@@ -1,0 +1,34 @@
+# api/fixtures/users.yaml
+parameters:
+    # Mot de passe: 123
+    hash: $argon2id$v=19$m=65536,t=4,p=1$NclbrnZE59yNL9I3NY3b6g$wNBYZLGyiZVhoLDnG7qZGs2XZFn+7nDDcS/oNabDADo
+
+App\Entity\Profile:
+    userProfile1:
+        organisation: 'Samakunchan Technology'
+    userProfile2:
+        organisation: 'Badgehades Technology'
+    userProfile3:
+    
+App\Entity\User:
+    admin:
+        email: admin\@test-environnement.fr
+        password: <{hash}>
+        roles: ['ROLE_ADMIN']
+        createdAt: <datetime()>
+        profile: '@userProfile1'
+        
+    user:
+        email: user\@test-environnement.fr
+        password: <{hash}>
+        roles: ['ROLE_USER']
+        createdAt: <datetime()>
+        profile: '@userProfile2'
+
+    random:
+        email: random\@test-environnement.fr
+        password: <{hash}>
+        roles: [ 'ROLE_USER' ]
+        createdAt: <datetime()>
+        profile: '@userProfile3'
+
