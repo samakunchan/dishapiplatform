@@ -1,5 +1,6 @@
 api_platform:
-    title: Hello API Platform
+    title: API Dish
+    description: This API provide dishes, ingredients and steps for all cooking application.
     version: 1.0.0
     mapping:
         paths: ['%kernel.project_dir%/src/Entity']

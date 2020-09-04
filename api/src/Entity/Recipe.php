@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\RecipeRepository;
@@ -13,11 +14,12 @@ use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 /**
  * @ORM\Entity(repositoryClass=RecipeRepository::class)
  * @ApiResource(
- *     collectionOperations={
+ *      collectionOperations={
  *          "get"={
  *              "normalization_context"={"groups"={"recipe:list"}}
  *          },
@@ -34,6 +36,12 @@ use Symfony\Component\Validator\Constraints as Assert;
  *          "delete"
  *     },
  *     denormalizationContext={"groups"={"recipe:post"}}
+ * )
+ * @ApiFilter(
+ *      SearchFilter::class,
+ *      properties={
+ *          "title": "ipartial"
+ *      }
  * )
  */
 class Recipe

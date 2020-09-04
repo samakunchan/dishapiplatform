@@ -14,10 +14,6 @@ class UserUnitTest extends KernelTestCase
 {
     use AbstractUnitTest;
 
-    public function setUp()
-    {
-
-    }
     public function testEmailIsValid()
     {
         $user = new User();
