@@ -73,7 +73,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      * @Assert\NotBlank(message="Le champ ne doit pas être vide")
-     * @Assert\Email()
+     * @Assert\Email
      * @Groups({"user:list", "user:details", "user:write"})
      */
     private ?string $email;
